@@ -12,4 +12,4 @@ Sets your background to be a random image from a [subreddit](http://www.reddit.c
   
 ## Limitations
 * Only works on subreddits with image posts (will error if a text-only subreddit is chosen)
-* Only sets backgrounds for [Xfce](http://www.xfce.org/)
+* Works on [Xfce](http://www.xfce.org/) and [MATE](http://mate-desktop.org/)
