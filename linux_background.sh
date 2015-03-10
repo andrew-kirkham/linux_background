@@ -16,15 +16,21 @@ fi
 
 mv $filename $HOME/reddit_backgrounds/.
 background=$HOME/reddit_backgrounds/$filename
-# use echo $DESKTOP_SESSION to determine desktop used. The following works if 'xfce' is returned.
-if [ "$DESKTOP_SESSION" = "xfce" ];
-then
+# use echo $DESKTOP_SESSION to determine desktop used. If $DESKTOP_SESSION does not work, try $GDMSESSION or $XDG_CURRENT_DESKTOP
+case "$DESKTOP_SESSION" in
+'xfce')
     xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/image-path --set $background
-    notify-send "Today's wallpaper is from /r/"$sub -i /usr/share/pixmaps/xfce4_xicon1.png
-elif [ "$DESKTOP_SESSION" = "mate" ];
-then
+;;
+'mate')
     gsettings set org.mate.background picture-filename $background
-    notify-send "Today's wallpaper is from /r/"$sub
-else
+;;
+'gnome')
+    gesttings set org.gnome.desktop.background picture-uri file:///$background
+;;
+*)
     notify-send "Unsupported desktop environment."
-fi
+    exit
+;;
+esac
+notify-send "Today's wallpaper is from /r/"$sub
+
