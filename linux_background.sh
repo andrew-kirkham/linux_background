@@ -4,7 +4,7 @@ default=$(shuf -n 1 subreddits)
 sub=${1:-$default}
 
 pattern="http://i.imgur.com.\w{0,}.jpg"
-url=$(curl -s "http://www.reddit.com/r/$sub/top" | grep -Eo $pattern | shuf -n 1)
+url=$(curl -s "https://www.reddit.com/r/$sub/top" | grep -Eo $pattern | shuf -n 1)
 
 filename=$(echo $url | grep -Eo "\w{0,}.jpg")
 wget -q $url
